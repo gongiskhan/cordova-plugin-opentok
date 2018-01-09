@@ -643,7 +643,7 @@ TBSession = (function() {
     element = streamElements[elementId];
     if (element) {
       element.parentNode.removeChild(element);
-      delete streamElements[streamId];
+      delete streamElements[subscriber.streamId];
       TBUpdateObjects();
     }
     return Cordova.exec(TBSuccess, TBError, OTPlugin, "unsubscribe", [subscriber.streamId]);
@@ -2632,7 +2632,7 @@ OTHelpers.roundFloat = function(value, places) {
     };
 
   };
-  
+
 })(window, window.OTHelpers);
 
 /*jshint browser:true, smarttabs:true*/
@@ -2846,7 +2846,7 @@ OTHelpers.observeStyleChanges = function(element, stylesToObserve, onChange) {
 
             OTHelpers.forEach(stylesToObserve, function(style) {
                 if(isHidden && (style == 'width' || style == 'height')) return;
-                
+
                 var newValue = getStyle(style);
 
                 if (newValue !== oldStyles[style]) {
@@ -2988,7 +2988,7 @@ OTHelpers.observeNodeOrChildNodeRemoval = function(element, onChange) {
     };
 
     document.body.appendChild(domElement);
-    
+
     if(OTHelpers.browserVersion().iframeNeedsLoad) {
       OTHelpers.on(domElement, 'load', wrappedCallback);
     } else {
@@ -3005,11 +3005,11 @@ OTHelpers.observeNodeOrChildNodeRemoval = function(element, onChange) {
     this.element = domElement;
 
   };
-  
+
 })(window, window.OTHelpers);
 
 /*
- * getComputedStyle from 
+ * getComputedStyle from
  * https://github.com/jonathantneal/Polyfills-for-IE8/blob/master/getComputedStyle.js
 
 // tb_require('../helpers.js')
@@ -3279,7 +3279,7 @@ OTHelpers.centerElement = function(element, width, height) {
       }
 
       if (!defaultDisplays[element.ownerDocument]) defaultDisplays[element.ownerDocument] = {};
-    
+
       // We need to know what display value to use for this node. The easiest way
       // is to actually create a node and read it out.
       var testNode = element.ownerDocument.createElement(element.nodeName),
